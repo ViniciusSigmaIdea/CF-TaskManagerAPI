@@ -1,4 +1,4 @@
-# CF-EventManagerAPI
-API do Gerenciador de Eventos da Central Familiar
+# CF-TaskManagerAPI
+API do Gerenciador de Tarefas da Central Familiar
 
-1 - CRUD de eventos/compromissos da família e seus membros.
+1 - CRUD de tarefas/compromissos da família e seus membros.
