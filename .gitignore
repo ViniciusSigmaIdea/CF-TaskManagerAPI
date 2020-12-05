@@ -106,5 +106,5 @@ dist
 #arquivos do vscode
 .vscode/
 
-#sample
-.env.sample
+#ENV_VARS
+.env

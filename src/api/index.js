@@ -1,15 +1,15 @@
 const express = require('express');
 
-const emojis = require('./emojis');
+const taskApi = require('./taskRoutes');
 
 const router = express.Router();
 
 router.get('/', (req, res) => {
   res.json({
-    message: 'API - 👋🌎🌍🌏'
+    message: 'API Central Familiar'
   });
 });
 
-router.use('/emojis', emojis);
+router.use('/task', taskApi);
 
 module.exports = router;

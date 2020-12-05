@@ -1,6 +1,7 @@
 const express = require('express');
-const morgan = require('morgan');
+const bodyParser = require('body-parser');
 const helmet = require('helmet');
+const path = require('path');
 const cors = require('cors');
 
 require('dotenv').config();
@@ -10,18 +11,17 @@ const api = require('./api');
 
 const app = express();
 
-app.use(morgan('dev'));
 app.use(helmet());
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(bodyParser.raw());
 
 app.get('/', (req, res) => {
-  res.json({
-    message: '🦄🌈✨👋🌎🌍🌏✨🌈🦄'
-  });
+  res.sendFile(path.join(__dirname+'/pages/index.html'));
 });
 
-app.use('/api/v1', api);
+app.use('/api/', api);
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
