@@ -1,6 +1,6 @@
 const dao = require("../dao/taskDAO")
 
-function create(req, res, next){
+async function create(req, res, next){
     try {
 
         const task = {
@@ -9,7 +9,7 @@ function create(req, res, next){
             obs: req.body.obs
         };
         if (!task.title || !task.dateTask || !task.obs) throw new ReferenceError('Informações para cadastro da tarefa estão incompletas');
-        const { id } = dao.create(task);
+        const { id } = await dao.create(task);
         res.json({
             status: 200,
             message: process.env.ENV = "DEV" ? `Tarefa [${id}] foi salva com sucesso.`: `Tarefa foi salva com sucesso.`,
@@ -20,28 +20,22 @@ function create(req, res, next){
     }
 }
 
-function findAll(req, res, next){
+async function findAll(req, res, next){
     try {
-        const tasks = dao.findAll();
-        res.json({
-            status: 200,
-            json: tasks
-        })
+        const tasks = await dao.findAll();
+        res.send(tasks);
     } catch (error) {
         if (error instanceof ReferenceError) res.status(404);
         next(error);
     }
 }
 
-function find(req, res, next){
+async function find(req, res, next){
     try {
         const { id } = req.params;
         if (!validateId(id)) throw new ReferenceError('ID requisitado não encontrado.');
-        const task = dao.find(id);
-        res.json({
-            status: 200,
-            json: task
-        })
+        const task = await dao.find(id);
+        res.send(task);
     } catch (error) {
         if (error instanceof ReferenceError) res.status(404);
         next(error);
@@ -62,11 +56,11 @@ function update(req, res, next){
     }
 }
 
-function remove(req, res, next){
+async function remove(req, res, next){
     try {
         const { id } = req.params;
         if (!validateId(id)) throw new ReferenceError('ID requisitado não encontrado.');
-        const isDeleted = dao.remove(id);
+        const isDeleted = await dao.remove(id);
         if (!isDeleted) throw new ReferenceError('ID requisitado não encontrado.');
         res.json({
             status: 200,

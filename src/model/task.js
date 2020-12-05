@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const database = require('..db/db');
+const database = require('../db/db');
 
 const Task = database.define('task',{
     id:{
@@ -12,8 +12,7 @@ const Task = database.define('task',{
         type: Sequelize.STRING,
         allowNull: false},
     dateTask:{
-        type: Sequelize.DATE,
-        allowNull: false},
+        type: Sequelize.DATE},
     obs:{
         type: Sequelize.TEXT}
 })
