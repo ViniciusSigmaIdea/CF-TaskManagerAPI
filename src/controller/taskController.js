@@ -2,7 +2,6 @@ const dao = require("../dao/taskDAO")
 
 async function create(req, res, next){
     try {
-
         const task = {
             title: req.body.title,
             dateTask: req.body.dateTask,
@@ -42,14 +41,21 @@ async function find(req, res, next){
     }
 }
 
-function update(req, res, next){
+async function update(req, res, next){
     try {
-        const { id } = req.params;
-        if (!validateId(id)) throw new ReferenceError('ID requisitado não encontrado.');
+        const task = {
+            id: req.params.id,
+            title: req.body.title,
+            dateTask: req.body.dateTask,
+            obs: req.body.obs
+        };
+        if (!validateId(task.id)) throw new ReferenceError('ID requisitado não encontrado.');
+        const isUpdated = await dao.update(task);
+        if (!isUpdated) throw new ReferenceError('ID requisitado não encontrado.');
         res.json({
             status: 200,
-            message: 'Teste update',
-        })
+            message: process.env.ENV = "DEV" ? `Tarefa [${task.id}] foi atualizada com sucesso.`: `Tarefa foi atualizada com sucesso.`,
+        });
     } catch (error) {
         if (error instanceof ReferenceError) res.status(404);
         next(error);
