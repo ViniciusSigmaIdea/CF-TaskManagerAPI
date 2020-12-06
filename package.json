@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "lint": "eslint --fix src",
-    "test": "mocha --exit"
+    "lint": "eslint --fix src"
   },
   "keywords": [],
   "author": "contato.vsr@gmail.com",
@@ -29,7 +28,6 @@
     "eslint": "^7.5.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
-    "mocha": "^8.1.1",
     "nodemon": "^2.0.4",
     "supertest": "^4.0.2"
   }
